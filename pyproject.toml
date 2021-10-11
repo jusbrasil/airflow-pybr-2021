@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "airflow-pybr-2021"
+version = "0.1.0"
+description = "Airflow Python Brasil 2021"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+apache-airflow = {version = "^2.1.4"}
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
