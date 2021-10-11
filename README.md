@@ -8,4 +8,4 @@ Apache Airflow é uma das principais ferramentas de orquestração de workflows,
 O Airflow permite que você construa pipelines de dados escrevendo apenas códigos Python. 
 Quando os workflows são definidos como código, eles se tornam manuteníveis, versionáveis, testáveis e colaborativos.
 
-[<img src="https://airflow.apache.org/docs/apache-airflow/stable/_images/arch-diag-basic.png">](Arquitetura do Airflow)
+<img src="https://airflow.apache.org/docs/apache-airflow/stable/_images/arch-diag-basic.png">
