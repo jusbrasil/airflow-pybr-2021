@@ -15,9 +15,10 @@ def movie_chooser(type, **context):
 
 
 with DAG(
-    "third_dag",
+    "movie_chooser_dag",
     start_date=datetime(2021, 10, 11),
     tags=["pybr-tutorial"],
+    schedule_interval="*/1 * * * *",
     catchup=False,
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)
