@@ -5,9 +5,11 @@ from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import PythonOperator
 
+import os
 
 def movie_chooser():
-    with open("csvs/movies.csv") as movies_csv:
+    airflow_home = os.environ["AIRFLOW_HOME"]
+    with open(f"{airflow_home}/dags/csvs/movies.csv") as movies_csv:
         movies = movies_csv.readlines()
         index = randint(0, len(movies) - 1)
         print(movies[index])
@@ -15,26 +17,26 @@ def movie_chooser():
 
 
 with DAG(
-    "first_dag",
+    "second_dag",
     start_date=datetime(2021, 10, 11),
     catchup=False,
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)
     # movie_choosen_1 = PythonOperator(
-    #     task_id="choose_movie", callable=movie_chooser, dag=dag
+    #     task_id="choose_movie", python_callable=movie_chooser, dag=dag
     # )
     # movie_choosen_2 = PythonOperator(
-    #     task_id="choose_movie_2", callable=movie_chooser, dag=dag
+    #     task_id="choose_movie_2", python_callable=movie_chooser, dag=dag
     # )
 
     # movie_choosen_3 = PythonOperator(
-    #     task_id="choose_movie_3", callable=movie_chooser, dag=dag
+    #     task_id="choose_movie_3", python_callable=movie_chooser, dag=dag
     # )
 
     tasks = []
     for i in range(3):
         task = PythonOperator(
-            task_id=f"choose_movie_{i}", callable=movie_chooser, dag=dag
+            task_id=f"choose_movie_{i}", python_callable=movie_chooser, dag=dag
         )
     end = DummyOperator(task_id="end", dag=dag)
 
