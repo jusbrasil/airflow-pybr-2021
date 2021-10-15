@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 
 
 def movie_chooser():
-    with open("csvs/movies.csv") as movies_csv:
+    with open("./dags/fixtures/movies.csv") as movies_csv:
         movies = movies_csv.readlines()
         index = randint(0, len(movies) - 1)
         print(movies[index])
@@ -16,12 +16,13 @@ def movie_chooser():
 
 with DAG(
     "first_dag",
+    tags=["pybr-tutorial"],
     start_date=datetime(2021, 10, 11),
     catchup=False,
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)
     movie_choosen = PythonOperator(
-        task_id="choose_movie", callable=movie_chooser, dag=dag
+        task_id="choose_movie", python_callable=movie_chooser, dag=dag
     )
     end = DummyOperator(task_id="end", dag=dag)
 
