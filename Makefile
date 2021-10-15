@@ -1,22 +1,19 @@
 # inicia o Postgres
-start-db:
-	@docker-compose up -d postgres
-	@docker-compose up initdb
+setup-airflow:
+	mkdir -p ./dags ./logs ./plugins
+	echo -e "AIRFLOW_UID=$(id -u)" > .env
+	@docker-compose up airflow-init
 
 # inicia o Airflow
-start-airflow: start-db
-	@docker-compose up webserver scheduler
+start-airflow: setup-airflow
+	@docker-compose up -d
 
 # para o Airflow
 stop-airflow:
-	@docker-compose down
+	@docker-compose down --volumes --remove-orphans
 
 # Limpa o Airflow, os volumes do Docker e os containers
 reset-airflow:
 	@docker-compose down -v || true
 	@docker-compose rm -f
-	rm -f webserver_config.py
-
-# Faz o rebuild de todas as imagens docker
-rebuild-airflow:
-	@docker-compose build
+	rm -rf .env ./logs ./plugins
