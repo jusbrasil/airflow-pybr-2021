@@ -18,7 +18,7 @@ with DAG(
     "movie_chooser_dag",
     start_date=datetime(2021, 10, 11),
     tags=["pybr-tutorial"],
-    schedule_interval="*/1 * * * *",
+    schedule_interval="*/2 * * * *",
     catchup=False,
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)

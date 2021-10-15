@@ -1,21 +1,10 @@
 from datetime import datetime
-from random import randint
 
 from airflow import DAG
+from airflow.operators.docker_operator import DockerOperator
 from airflow.operators.dummy import DummyOperator
-from airflow.operators.python import PythonOperator
-
-
-def movie_chooser(type, **context):
-    with open("csvs/movies.csv") as movies_csv:
-        movies = movies_csv.readlines()
-        index = randint(0, len(movies) - 1)
-        context["ti"].xcom_push(key=f"movie_choosed_{type}", value=movies[index])
-        return movies[index]
-
 
 # mudando pra docker imagem pra usar o pandas e filtrar melhor o filme
-
 with DAG(
     "fifth_dag",
     start_date=datetime(2021, 10, 11),
@@ -24,13 +13,15 @@ with DAG(
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)
     tasks = []
-    for i in range(3):
-        task = PythonOperator(
-            task_id=f"choose_movie_{i}",
-            python_callable=movie_chooser,
-            op_kwargs={"type": i},
+    genres = ["Romance", "Comedy", "Drama", "Animation", "Fantasy"]
+    for genre in genres:
+        task = DockerOperator(
+            task_id=f"choose_movie_{genre}",
             dag=dag,
-            provide_context=True,
+            image="pybr-tutorial",
+            command=["python", "movie_chooser.py", genre],
+            auto_remove=True,
         )
+        tasks.append(task)
     end = DummyOperator(task_id="end", dag=dag)
     start >> tasks >> end

@@ -19,15 +19,14 @@ with DAG(
     "fourth_dag",
     start_date=datetime(2021, 10, 11),
     tags=["pybr-tutorial"],
-    schedule_interval="*/1 * * * *",
+    schedule_interval="*/2 * * * *",
     catchup=False,
 ) as dag:
     start = DummyOperator(task_id="start", dag=dag)
     wait_movie_choose = ExternalTaskSensor(
         task_id="wait_movie_to_be_choosen",
         external_dag_id="movie_chooser_dag",
-        external_task_id="end",
-        execution_date_fn=lambda dt: dt + timedelta(minutes=10),
+        timeout=30,
     )
     tasks = []
     for i in range(3):
