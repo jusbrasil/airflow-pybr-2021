@@ -23,15 +23,15 @@ Siga a documentação oficial para instalar o pyenv na sua máquina:
 Instale o Pyhton 3.9:
 
 ```shell
-$ pip install 3.9-dev
+$ pip install 3.9.7
 ```
 
 ```shell
-$ pyenv virtualenv 3.9-dev airflow-pybr
+$ pyenv virtualenv 3.9.7 pybr-airflow
 ```
 
 ```shell
-$ pyenv local airflow-pybr
+$ pyenv local pybr-airflow
 ```
 
 **Caso você não tenha o pip instalado**, instale ele na sua máquina seguindo o tutorial abaixo:
@@ -56,6 +56,24 @@ Agora você pode rodar o airflow; para isso execute o seguinte comando:
 ```shell
 $ airflow webserver -p 8081
 ```
+
+Agora acesse a seguinte URL: **http://localhost:8081**.
+
+
+#### Troubleshooting: Airflow não sendo reconhecido
+
+Caso o comando do airflow não tiver sendo reconhecido, verifique se o `~/.local/bin` na sua variável de ambiente `PATH` está configurada corretamente:
+
+``
+PATH=$PATH:~/.local/bin
+``
+
+Você também pode iniciar o Airflow com:
+
+```shell
+$ python -m airflow
+```
+
 
 ## Rodando localmente com Docker Compose
 
