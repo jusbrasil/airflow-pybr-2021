@@ -10,7 +10,54 @@ Quando os workflows são definidos como código, eles se tornam manuteníveis, v
 
 <img src="https://airflow.apache.org/docs/apache-airflow/stable/_images/arch-diag-basic.png">
 
-## Rodando localmente
+## Rodando localmente com Pyenv
+Você vai precisar de um ambiente virtual com python 3.6+ (recomendamos o 3.9).
+
+### Pyenv
+Caso não tenha instalado na maquina, você pode usar o pyenv para ter multiplas versoes do python e criar seu ambiente virtual com ele.
+Siga a documentação oficial para instalar o pyenv na sua máquina:
+- https://github.com/pyenv/pyenv
+- https://github.com/pyenv/pyenv-virtualenv
+- https://realpython.com/intro-to-pyenv/
+
+Instale o Pyhton 3.9:
+
+```shell
+$ pip install 3.9-dev
+```
+
+```shell
+$ pyenv virtualenv 3.9-dev airflow-pybr
+```
+
+```shell
+$ pyenv local airflow-pybr
+```
+
+**Caso você não tenha o pip instalado**, instale ele na sua máquina seguindo o tutorial abaixo:
+- https://pip.pypa.io/en/stable/installation/
+
+### Instalando o Airflow
+Depois do ambiente virtual instalado, você vai precisar do `apache-airflow` e do `apache-airflow-providers-docker instalados. Você pode fazer assim:
+
+```shell
+$ pip install apache-airflow apache-airflow-providers-docker
+```
+
+Depois você precisa configurar o airflow; para isso siga estes passos:
+
+```shell
+$ airflow db init
+$ airflow users create --username=admin --firstname test --lastname test --role Admin --email test@test.com
+```
+
+Agora você pode rodar o airflow; para isso execute o seguinte comando:
+
+```shell
+$ airflow webserver -p 8081
+```
+
+## Rodando localmente com Docker Compose
 
 Para rodar localmente é necessário, você atender aos seguintes **pré-requisitos**:
 
