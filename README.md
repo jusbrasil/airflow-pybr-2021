@@ -38,7 +38,7 @@ $ pyenv local pybr-airflow
 - https://pip.pypa.io/en/stable/installation/
 
 ### Instalando o Airflow
-Depois do ambiente virtual instalado, você vai precisar do `apache-airflow` e do `apache-airflow-providers-docker instalados. Você pode fazer assim:
+Depois do ambiente virtual instalado, você vai precisar do `apache-airflow` e do `apache-airflow-providers-docker instalados`. Você pode fazer assim:
 
 ```shell
 $ pip install apache-airflow apache-airflow-providers-docker
