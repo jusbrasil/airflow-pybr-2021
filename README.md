@@ -80,8 +80,8 @@ $ python -m airflow
 ### Pré-requisitos
 Para rodar localmente é necessário, você atender aos seguintes **pré-requisitos**:
 
-- Instalar o Docker Community Edition (CE) na sua máquina. É recomendável que sua máquina tenha ao menos 4GB de RAM livres.
-- Instalar o Docker Compose v1.29.1 ou alguma versão mais nova na sua máquina.
+- Instalar o Docker Community Edition (CE) na sua máquina (link de instalação [aqui](https://docs.docker.com/engine/install/)). É recomendável que sua máquina tenha ao menos 4GB de RAM livres.
+- Instalar o Docker Compose v1.29.1 ou alguma versão mais nova na sua máquina (link de instalação [aqui](https://docs.docker.com/compose/install/)).
 
 ### Iniciar o ambiente
 Para **iniciar o ambiente**, basta executar o comando abaixo:
