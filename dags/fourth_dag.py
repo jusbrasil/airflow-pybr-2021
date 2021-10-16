@@ -8,7 +8,7 @@ from airflow.sensors.external_task_sensor import ExternalTaskSensor
 
 def get_gross_year(type, **context):
     task_instance = context["ti"]
-    movie_data_str = task_instance.xcom_pull(key=f"movie_choosed_{i}")
+    movie_data_str = task_instance.xcom_pull(key=f"movie_choosed_{type}", task_ids=f"choose_movie_{type}", dag_id="movie_chooser_dag")
     movie_data = movie_data_str.split(",")
     return movie_data[-2:]
 
