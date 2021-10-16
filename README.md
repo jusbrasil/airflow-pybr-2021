@@ -77,15 +77,18 @@ $ python -m airflow
 
 ## Rodando localmente com Docker Compose
 
+### Pré-requisitos
 Para rodar localmente é necessário, você atender aos seguintes **pré-requisitos**:
 
 - Instalar o Docker Community Edition (CE) na sua máquina. É recomendável que sua máquina tenha ao menos 4GB de RAM livres.
 - Instalar o Docker Compose v1.29.1 ou alguma versão mais nova na sua máquina.
 
+### Iniciar o ambiente
 Para **iniciar o ambiente**, basta executar o comando abaixo:
 
 `make start-airflow`
 
+### Destruir o ambiente
 Para **limpar o ambiente**, basta executar o seguinte comando:
 
 `make reset-airflow`
